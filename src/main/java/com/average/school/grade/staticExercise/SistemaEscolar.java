@@ -70,39 +70,71 @@ public class SistemaEscolar {
         System.out.println("PRIMEIRO ANO");
         System.out.println("TURMA A");
 
-        alunosTurmaA.stream().forEach(S -> {
-                    System.out.println("Nome: " + S.getNome() + " Nota: " + S.getNota());
-                });
-
-        System.out.println("Alunos Aprovados" + filtraAlunosAprovados(alunosTurmaA));
+        listaAlunoNota(alunosTurmaA);
 
         System.out.println("==================");
         System.out.println("TURMA B");
 
-        alunosTurmaB.stream().forEach(S -> {
-            System.out.println("Nome: " + S.getNome() + " Nota: " + S.getNota());
-        });
-
-        System.out.println("Alunos Aprovados" + filtraAlunosAprovados(alunosTurmaB));
-
+        listaAlunoNota(alunosTurmaB);
 
         System.out.println("==================");
         System.out.println("TURMA C");
-        alunosTurmaC.stream().forEach(S -> {
-            System.out.println("Nome: " + S.getNome() + " Nota: " + S.getNota());
-        });
+        listaAlunoNota(alunosTurmaC);
 
-        System.out.println("Alunos Aprovados" + filtraAlunosAprovados(alunosTurmaC));
+
+        System.out.println("=========");
+        System.out.println("Prmeira Série");
+        System.out.println("Turma A");
+        System.out.println("Porcentagem de Aprovados: " + porcentagemAprovados(alunosTurmaA) + "%");
+        System.out.println("Média das notas: " + mediaNotaTurma(alunosTurmaA));
+
+        System.out.println("Turma B");
+        System.out.println("Porcentagem de Aprovados: " + porcentagemAprovados(alunosTurmaB) + "%");
+        System.out.println("Média das notas: " + mediaNotaTurma(alunosTurmaB));
+
+        System.out.println("Turma C");
+        System.out.println("Porcentagem de Aprovados: " + porcentagemAprovados(alunosTurmaC) + "%");
+        System.out.println("Média das notas: " + mediaNotaTurma(alunosTurmaC));
+
+
 
         ////////////////////////////////////////////////////////
 
     }
 
+    private static void listaAlunoNota(List<Alunos> alunosTurma) {
+        alunosTurma.stream().forEach(S -> {
+                    System.out.println("Nome: " + S.getNome() + " Nota: " + S.getNota());
+                });
+    }
+
+    private static Integer mediaNotaTurma(List<Alunos> alunosTurma) {
+
+        List<Integer> notas = new ArrayList<>();
+        alunosTurma.stream().forEach(S -> {
+            notas.add(S.getNota());
+        });
+
+        int sum = notas.stream().mapToInt(Integer::intValue).sum();
+
+        return sum / notas.size();
+
+    }
+
+
+    private static int porcentagemAprovados(List<Alunos> alunosTurma) {
+
+        var aprovados = filtraAlunosAprovados(alunosTurma).size();
+        var porcentagem = (aprovados * 100) / alunosTurma.size();
+
+        return porcentagem;
+    }
+
     private static List<String> filtraAlunosAprovados(List<Alunos> alunosTurma) {
 
         List<String> alunosAprovados = new ArrayList<>();
-        alunosTurma.stream().forEach(S -> { if (S.getNota() >=3){
-            alunosAprovados.add("Nome: " + S.nome + " = " + "Nota: " +  S.getNota());
+        alunosTurma.stream().forEach(Alunos -> { if (Alunos.getNota() >= 3){
+            alunosAprovados.add("Nome: " + Alunos.getNome() + " = " + "Nota: " +  Alunos.getNota());
         }
         });
         return alunosAprovados;
