@@ -1,5 +1,7 @@
 package com.average.school.grade.staticExercise;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,81 +24,20 @@ public class SistemaEscolar {
 
         Escola escola = new Escola();
 
-        //////////////////// PRIMEIRO ANO ESCOLAR
-        AnoEscolar primeiroANo = new AnoEscolar();
-        // TURMA A
-        Turmas turmaA = new Turmas();
-        List<Alunos> alunosTurmaA = new ArrayList<>();
+        escola.setPrimeiroAno(criaPrimeiroAnoEscolar());
 
-        alunosTurmaA.add(new Alunos("Aluno-1-1A",4));
-        alunosTurmaA.add(new Alunos("Aluno-2-1A",3));
-        alunosTurmaA.add(new Alunos("Aluno-3-1A",5));
-        alunosTurmaA.add(new Alunos("Aluno-4-1A",5));
-        alunosTurmaA.add(new Alunos("Aluno-5-1A",1));
+        System.out.println("=== PRIMEIRO ANO ===");
+        System.out.println("=== TURMA A ===");
 
-        turmaA.setAlunos(alunosTurmaA);
-        primeiroANo.setTurmaA(turmaA);
+        listaAlunoNota(escola.primeiroAno.getTurmaA().getAlunos());
 
-        // TURMA B
-        Turmas turmaB = new Turmas();
-        List<Alunos> alunosTurmaB = new ArrayList<>();
+        System.out.println("");
+        System.out.println("=== TURMA B ===");
+        listaAlunoNota(escola.primeiroAno.getTurmaB().getAlunos());
 
-        alunosTurmaB.add(new Alunos("Aluno-1-1B",2));
-        alunosTurmaB.add(new Alunos("Aluno-2-1B",2));
-        alunosTurmaB.add(new Alunos("Aluno-3-1B",3));
-        alunosTurmaB.add(new Alunos("Aluno-4-1B",5));
-        alunosTurmaB.add(new Alunos("Aluno-5-1B",5));
-
-        turmaB.setAlunos(alunosTurmaB);
-        primeiroANo.setTurmaB(turmaB);
-
-        // TURMA C
-        Turmas turmaC = new Turmas();
-        List<Alunos> alunosTurmaC = new ArrayList<>();
-
-        alunosTurmaC.add(new Alunos("Aluno-1-1C",1));
-        alunosTurmaC.add(new Alunos("Aluno-2-1C",1));
-        alunosTurmaC.add(new Alunos("Aluno-3-1C",1));
-        alunosTurmaC.add(new Alunos("Aluno-4-1C",2));
-        alunosTurmaC.add(new Alunos("Aluno-5-1C",4));
-
-        turmaB.setAlunos(alunosTurmaC);
-        primeiroANo.setTurmaC(turmaC);
-
-        escola.setPrimeiroAno(primeiroANo);
-        ////////////////////////////////////////////////////////
-
-
-        System.out.println("PRIMEIRO ANO");
-        System.out.println("TURMA A");
-
-        listaAlunoNota(alunosTurmaA);
-
-        System.out.println("==================");
-        System.out.println("TURMA B");
-
-        listaAlunoNota(alunosTurmaB);
-
-        System.out.println("==================");
-        System.out.println("TURMA C");
-        listaAlunoNota(alunosTurmaC);
-
-
-        System.out.println("=========");
-        System.out.println("Prmeira Série");
-        System.out.println("Turma A");
-        System.out.println("Porcentagem de Aprovados: " + porcentagemAprovados(alunosTurmaA) + "%");
-        System.out.println("Média das notas: " + mediaNotaTurma(alunosTurmaA));
-
-        System.out.println("Turma B");
-        System.out.println("Porcentagem de Aprovados: " + porcentagemAprovados(alunosTurmaB) + "%");
-        System.out.println("Média das notas: " + mediaNotaTurma(alunosTurmaB));
-
-        System.out.println("Turma C");
-        System.out.println("Porcentagem de Aprovados: " + porcentagemAprovados(alunosTurmaC) + "%");
-        System.out.println("Média das notas: " + mediaNotaTurma(alunosTurmaC));
-
-
+        System.out.println("");
+        System.out.println("=== TURMA C ===");
+        listaAlunoNota(escola.primeiroAno.getTurmaC().getAlunos());
 
         ////////////////////////////////////////////////////////
 
@@ -138,5 +79,50 @@ public class SistemaEscolar {
         }
         });
         return alunosAprovados;
+    }
+
+    public static AnoEscolar criaPrimeiroAnoEscolar() {
+
+        AnoEscolar primeiroAno = new AnoEscolar();
+        // TURMA A
+        Turmas turmaA = new Turmas();
+        List<Alunos> alunosTurmaA = new ArrayList<>();
+
+        alunosTurmaA.add(new Alunos("Aluno-1-1A", 4));
+        alunosTurmaA.add(new Alunos("Aluno-2-1A", 3));
+        alunosTurmaA.add(new Alunos("Aluno-3-1A", 5));
+        alunosTurmaA.add(new Alunos("Aluno-4-1A", 5));
+        alunosTurmaA.add(new Alunos("Aluno-5-1A", 1));
+
+        turmaA.setAlunos(alunosTurmaA);
+        primeiroAno.setTurmaA(turmaA);
+
+        // TURMA B
+        Turmas turmaB = new Turmas();
+        List<Alunos> alunosTurmaB = new ArrayList<>();
+
+        alunosTurmaB.add(new Alunos("Aluno-1-1B", 2));
+        alunosTurmaB.add(new Alunos("Aluno-2-1B", 2));
+        alunosTurmaB.add(new Alunos("Aluno-3-1B", 3));
+        alunosTurmaB.add(new Alunos("Aluno-4-1B", 5));
+        alunosTurmaB.add(new Alunos("Aluno-5-1B", 5));
+
+        turmaB.setAlunos(alunosTurmaB);
+        primeiroAno.setTurmaB(turmaB);
+
+        // TURMA C
+        Turmas turmaC = new Turmas();
+        List<Alunos> alunosTurmaC = new ArrayList<>();
+
+        alunosTurmaC.add(new Alunos("Aluno-1-1C", 1));
+        alunosTurmaC.add(new Alunos("Aluno-2-1C", 1));
+        alunosTurmaC.add(new Alunos("Aluno-3-1C", 1));
+        alunosTurmaC.add(new Alunos("Aluno-4-1C", 2));
+        alunosTurmaC.add(new Alunos("Aluno-5-1C", 4));
+
+        turmaC.setAlunos(alunosTurmaC);
+        primeiroAno.setTurmaC(turmaB);
+
+        return primeiroAno;
     }
 }
